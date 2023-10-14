@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+node_modules/
+node_modules
+
+.pnp
 /.pnp
 .pnp.js
 
@@ -17,6 +21,21 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env
+
+/.idea
+/.vs-code
+.idea/
+.vs-code/
+*.vscode/
+
+.eslintcache
+config.env
+
+package-lock.json
+yarn.lock
+
+debug.log
 
 npm-debug.log*
 yarn-debug.log*
