@@ -7,6 +7,7 @@ import StartScreen from "../layouts/StartScreen";
 import Question from "../components/Question";
 import Footer from "../layouts/Footer";
 import NextButton from "../components/NextButton";
+import ProgressBar from "../components/ProgressBar";
 
 //**************** Action Types ****************//
 export const ACTION = {
@@ -33,7 +34,7 @@ const initialState = {
 }
 
 function quickQuizReducer(state, action) {
-    switch(action.type) {
+    switch (action.type) {
         case ACTION.DATA_RECEIVED:
             return {
                 ...state,
@@ -67,18 +68,20 @@ function quickQuizReducer(state, action) {
                 index: state.index + 1,
                 answer: null
             }
-            default:
-                throw new Error("Unknown Action: " + action.type);
+        default:
+            throw new Error("Unknown Action: " + action.type);
     }
 
 
 }
+
 export default function App() {
     //**************** variables ****************//
     const API_URL = `https://mabdurahman.github.io/questions-api/data/reactjs-questions.json`;
     const [state, dispatch] = useReducer(quickQuizReducer, initialState);
     const {questions, index, status, answer, points, highScore, secondsRemaining} = state;
     const numberOfQuestions = questions.length;
+    const maxPossiblePoints = questions.reduce((previousValue, currentValue) => previousValue + currentValue.points, 0);
 
     console.log(`questions: `, questions);
     console.log(`index: `, index);
@@ -93,29 +96,32 @@ export default function App() {
 
     return (
         <div className={'app'}>
-            <Header />
+            <Header/>
             <MainContent>
-                {status === "loading" && <Loader />}
-                {status === "error" && <Error />}
+                {status === "loading" && <Loader/>}
+                {status === "error" && <Error/>}
                 {status === "ready" && (
                     <StartScreen numQuestions={numberOfQuestions} dispatch={dispatch}/>
                 )}
                 {status === "active" && (
                     <>
+                        <ProgressBar index={index} numQuestions={numberOfQuestions} points={points}
+                                     maxPossiblePoints={maxPossiblePoints}
+                                     answer={answer} />
                         <Question
                             question={questions[index]}
                             dispatch={dispatch}
                             answer={answer}
                         />
-                    <Footer>
+                        <Footer>
 
-                    <NextButton dispatch={dispatch}
-                                answer={answer}
-                                numQuestions={numberOfQuestions}
-                                index={index}  />
-                    </Footer>
+                            <NextButton dispatch={dispatch}
+                                        answer={answer}
+                                        numQuestions={numberOfQuestions}
+                                        index={index}/>
+                        </Footer>
                     </>
-                     )}
+                )}
             </MainContent>
         </div>
 

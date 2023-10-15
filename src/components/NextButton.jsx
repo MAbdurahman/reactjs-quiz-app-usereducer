@@ -3,7 +3,7 @@ import {ACTION} from "../app/App";
 
 export default function NextButton({dispatch, answer, index, numQuestions}) {
 
-    if(answer === null) {
+    if (answer === null) {
         return null;
     }
 
@@ -11,7 +11,7 @@ export default function NextButton({dispatch, answer, index, numQuestions}) {
         return (
             <button
                 className="btn btn-ui"
-                onClick={() => dispatch({ type: ACTION.NEXT_QUESTION })}
+                onClick={() => dispatch({type: ACTION.NEXT_QUESTION})}
             >
                 Next
             </button>
@@ -21,7 +21,7 @@ export default function NextButton({dispatch, answer, index, numQuestions}) {
         return (
             <button
                 className="btn btn-ui"
-                onClick={() => dispatch({ type: ACTION.FINISH })}
+                onClick={() => dispatch({type: ACTION.FINISH})}
             >
                 Finish
             </button>
