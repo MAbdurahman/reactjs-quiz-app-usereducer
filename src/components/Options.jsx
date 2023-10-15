@@ -17,7 +17,7 @@ export default function Options({answer, dispatch, question}) {
                     }`}
                     key={option}
                     disabled={hasAnswered}
-                    onClick={() => dispatch({ type: ACTION.NEW_ANSWER, payload: index })}
+                    onClick={() => dispatch({type: ACTION.NEW_ANSWER, payload: index})}
                 >
                     {option}
                 </button>

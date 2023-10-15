@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function ProgressBar({index, numQuestions, points, maxPossiblePoints, answer }) {
+export default function ProgressBar({index, numQuestions, points, maxPossiblePoints, answer}) {
 
     return (
         <header className="progress">
-            <progress max={numQuestions} value={index + Number(answer !== null)} />
+            <progress max={numQuestions} value={index + Number(answer !== null)}/>
             <p>Question <strong>{index + 1}</strong> / {numQuestions}</p>
             <p><strong>{points}</strong> / {maxPossiblePoints}</p>
         </header>

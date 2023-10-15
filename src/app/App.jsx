@@ -9,6 +9,7 @@ import Footer from "../layouts/Footer";
 import NextButton from "../components/NextButton";
 import ProgressBar from "../components/ProgressBar";
 import FinishScreen from "../layouts/FinishScreen";
+import Timer from "../components/Timer";
 
 //**************** Action Types ****************//
 export const ACTION = {
@@ -19,8 +20,10 @@ export const ACTION = {
     NEXT_QUESTION: "NEXT_QUESTION",
     FINISH_QUIZ: "FINISH_QUIZ",
     RESTART_QUIZ: "RESTART_QUIZ",
-    TICK: "TICK"
+    START_TIMER: "START_TIMER"
 }
+
+const SECONDS_PER_QUESTION = 30;
 
 //**************** initial state ****************//
 const initialState = {
@@ -34,6 +37,15 @@ const initialState = {
     secondsRemaining: null
 }
 
+/**
+ * @description -
+ * @param state
+ * @param action
+ * @returns {(*&{status: string})|{highScore: number, answer: null, questions: ([]|*),
+ * secondsRemaining: null, index: number, status: string, points: number}|(*&{highScore: (number|string|SVGPointList|*),
+ * status: string})|(*&{secondsRemaining: number, status: (string|*)})|(*&{questions: *, status: string})|(*&{answer: *,
+ * points: (*|number|string|SVGPointList)})|(*&{answer: null, index: *})}
+ */
 function quickQuizReducer(state, action) {
     switch (action.type) {
         case ACTION.DATA_RECEIVED:
@@ -51,6 +63,7 @@ function quickQuizReducer(state, action) {
             return {
                 ...state,
                 status: "active",
+                secondsRemaining: state.questions.length * SECONDS_PER_QUESTION,
             };
         case ACTION.NEW_ANSWER:
             const question = state.questions.at(state.index);
@@ -82,11 +95,15 @@ function quickQuizReducer(state, action) {
                 questions: state.questions,
                 status: "ready"
             }
+        case ACTION.START_TIMER:
+            return {
+                ...state,
+                secondsRemaining: state.secondsRemaining - 1,
+                status: state.secondsRemaining === 0 ? "finished" : state.status
+            }
         default:
             throw new Error("Unknown Action: " + action.type);
     }
-
-
 }
 
 export default function App() {
@@ -96,9 +113,6 @@ export default function App() {
     const {questions, index, status, answer, points, highScore, secondsRemaining} = state;
     const numberOfQuestions = questions.length;
     const maxPossiblePoints = questions.reduce((previousValue, currentValue) => previousValue + currentValue.points, 0);
-
-    console.log(`questions: `, questions);
-    console.log(`index: `, index);
 
     //**************** functions ****************//
     useEffect(() => {
@@ -121,14 +135,14 @@ export default function App() {
                     <>
                         <ProgressBar index={index} numQuestions={numberOfQuestions} points={points}
                                      maxPossiblePoints={maxPossiblePoints}
-                                     answer={answer} />
+                                     answer={answer}/>
                         <Question
                             question={questions[index]}
                             dispatch={dispatch}
                             answer={answer}
                         />
                         <Footer>
-
+                            <Timer dispatch={dispatch} secondsRemaining={secondsRemaining} />
                             <NextButton dispatch={dispatch}
                                         answer={answer}
                                         numQuestions={numberOfQuestions}

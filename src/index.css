@@ -265,6 +265,7 @@ progress {
 
 .timer {
   float: left;
+  font-family: 'Roboto Mono', monospace;
   font-size: 1.8rem;
   color: var(--color-medium);
   border: 2px solid var(--color-dark);

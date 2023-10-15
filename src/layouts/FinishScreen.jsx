@@ -20,7 +20,7 @@ export default function FinishScreen({points, maxPossiblePoints, highScore, disp
             <p className="high-score">(High Score: {highScore} points)</p>
             <button
                 className="btn btn-ui"
-                onClick={() => dispatch({ type: ACTION.RESTART_QUIZ })}
+                onClick={() => dispatch({type: ACTION.RESTART_QUIZ})}
             >
                 Restart Quiz
             </button>
