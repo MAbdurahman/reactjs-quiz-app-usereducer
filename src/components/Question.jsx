@@ -1,14 +1,13 @@
 import React from 'react';
 import Options from "./Options";
 
-export default function Question({question, dispatch, answer, correctOption, options}) {
-
+export default function Question({question, dispatch, answer}) {
+    console.log(`question`, question);
 
     return (
         <div>
-            <h4>{question}</h4>
-            <Options question={question} options={options} correctOption={correctOption} dispatch={dispatch}
-                     answer={answer}/>
+            <h4>{question.question}</h4>
+            <Options question={question} dispatch={dispatch} answer={answer}/>
         </div>
 
     );

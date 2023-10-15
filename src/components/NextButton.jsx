@@ -1,26 +1,27 @@
 import React from 'react';
+import {ACTION} from "../app/App";
 
-export default function NextButton({dispatch, answer, currentIndex, numQuestions}) {
+export default function NextButton({dispatch, answer, index, numQuestions}) {
 
     if(answer === null) {
         return null;
     }
 
-    if (currentIndex < numQuestions - 1)
+    if (index < numQuestions - 1)
         return (
             <button
                 className="btn btn-ui"
-                onClick={() => dispatch({ type: "nextQuestion" })}
+                onClick={() => dispatch({ type: ACTION.NEXT_QUESTION })}
             >
                 Next
             </button>
         );
 
-    if (currentIndex === numQuestions - 1)
+    if (index === numQuestions - 1)
         return (
             <button
                 className="btn btn-ui"
-                onClick={() => dispatch({ type: "finish" })}
+                onClick={() => dispatch({ type: ACTION.FINISH })}
             >
                 Finish
             </button>
