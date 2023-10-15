@@ -8,16 +8,17 @@ import Question from "../components/Question";
 import Footer from "../layouts/Footer";
 import NextButton from "../components/NextButton";
 import ProgressBar from "../components/ProgressBar";
+import FinishScreen from "../layouts/FinishScreen";
 
 //**************** Action Types ****************//
 export const ACTION = {
     DATA_RECEIVED: "DATA_RECEIVED",
     DATA_FAILED: "DATA_FAILED",
-    START: "START",
+    START_QUIZ: "START_QUIZ",
     NEW_ANSWER: "NEW_ANSWER",
     NEXT_QUESTION: "NEXT_QUESTION",
-    FINISH: "FINISH",
-    RESTART: "RESTART",
+    FINISH_QUIZ: "FINISH_QUIZ",
+    RESTART_QUIZ: "RESTART_QUIZ",
     TICK: "TICK"
 }
 
@@ -46,7 +47,7 @@ function quickQuizReducer(state, action) {
                 ...state,
                 status: "error"
             };
-        case ACTION.START:
+        case ACTION.START_QUIZ:
             return {
                 ...state,
                 status: "active",
@@ -67,6 +68,19 @@ function quickQuizReducer(state, action) {
                 ...state,
                 index: state.index + 1,
                 answer: null
+            };
+        case ACTION.FINISH_QUIZ:
+            return {
+                ...state,
+                status: "finished",
+                highScore:
+                    state.points > state.highScore ? state.points : state.highScore,
+            };
+        case ACTION.RESTART_QUIZ:
+            return {
+                ...initialState,
+                questions: state.questions,
+                status: "ready"
             }
         default:
             throw new Error("Unknown Action: " + action.type);
@@ -121,6 +135,14 @@ export default function App() {
                                         index={index}/>
                         </Footer>
                     </>
+                )}
+                {status === "finished" && (
+                    <FinishScreen
+                        points={points}
+                        maxPossiblePoints={maxPossiblePoints}
+                        highScore={highScore}
+                        dispatch={dispatch}
+                    />
                 )}
             </MainContent>
         </div>

@@ -4,8 +4,6 @@ import {ACTION} from "../app/App";
 export default function Options({answer, dispatch, question}) {
     const hasAnswered = answer !== null;
 
-    /*console.log(`options`, question.options)*/
-
     return (
         <div className={'options'}>
             {question.options.map((option, index) => (

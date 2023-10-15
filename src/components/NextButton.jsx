@@ -13,7 +13,7 @@ export default function NextButton({dispatch, answer, index, numQuestions}) {
                 className="btn btn-ui"
                 onClick={() => dispatch({type: ACTION.NEXT_QUESTION})}
             >
-                Next
+                Next Question
             </button>
         );
 
@@ -21,9 +21,9 @@ export default function NextButton({dispatch, answer, index, numQuestions}) {
         return (
             <button
                 className="btn btn-ui"
-                onClick={() => dispatch({type: ACTION.FINISH})}
+                onClick={() => dispatch({type: ACTION.FINISH_QUIZ})}
             >
-                Finish
+                Finished Quiz
             </button>
         );
 };
