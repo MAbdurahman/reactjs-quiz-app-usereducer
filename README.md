@@ -9,3 +9,6 @@ First install node_modules folder
 
 Then to start app in browser at http://localhost:3000
 ### `npm start or yarn start`
+
+
+![react-quiz-app-usereducer](https://github.com/MAbdurahman/reactjs-quiz-app-usereducer/assets/20928980/8c807e79-91fb-4603-8b12-4e788abb4c29)
