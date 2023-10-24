@@ -108,7 +108,7 @@ function quickQuizReducer(state, action) {
 
 export default function App() {
     //**************** variables ****************//
-    const API_URL = `https://mabdurahman.github.io/questions-api/data/reactjs-questions.json`;
+    const API_URL = `https://mabdurahman.github.io/questions-api/data/deadly-animals.json`;
     const [state, dispatch] = useReducer(quickQuizReducer, initialState);
     const {questions, index, status, answer, points, highScore, secondsRemaining} = state;
     const numberOfQuestions = questions.length;
