@@ -2,14 +2,14 @@
 
 `reactjs-quiz-app-usereducer is a react-app that implements a useReducer for state management in a react project`
 
-This repo is an exercise to get familiarize state management in ReactJS.
+This repo is an exercise to get  familiarize state management in ReactJS.
 
 First install node_modules folder
 ### `npm install or yarn install`
 
-Then to start app in browser at http://localhost:3000
+Then to start the app in the browser at http://localhost:3000
 ### `npm start or yarn start`
 
-[Live demo](https://reactjs-quiz-usereducer.netlify.app/)
+### [Live demo](https://reactjs-quiz-usereducer.netlify.app/)
 
 ![react-quiz-app-usereducer](https://github.com/MAbdurahman/reactjs-quiz-app-usereducer/assets/20928980/8c807e79-91fb-4603-8b12-4e788abb4c29)
